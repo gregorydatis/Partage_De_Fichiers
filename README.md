@@ -1,10 +1,10 @@
 # Partage_De_Fichiers
 
-# Procédure — Serveur de Fichiers Windows Server 2022
+# Procédure - Serveur de Fichiers Windows Server 2022
 
 **Domaine :** `LabDT.corp`  
-**Serveur :** `SRV1` — IP `192.168.1.20`  
-**Client :** `CLIENT1` — Windows 11  
+**Serveur :** `SRV1` - IP `192.168.1.20`  
+**Client :** `CLIENT1` - Windows 11  
 
 
 ---
@@ -17,7 +17,7 @@
 
 ---
 
-## Étape 1 — Installation du rôle Serveur de fichiers
+## Étape 1 - Installation du rôle Serveur de fichiers
 
 ```
 Install-WindowsFeature -Name FS-FileServer -IncludeManagementTools
@@ -30,7 +30,7 @@ Get-WindowsFeature -Name FS-FileServer
 
 ---
 
-## Étape 2 — Création du dossier racine
+## Étape 2 - Création du dossier racine
 
 ```
 New-Item -Path "C:\Shares\Documents_Entreprise" -ItemType Directory
@@ -38,20 +38,20 @@ New-Item -Path "C:\Shares\Documents_Entreprise" -ItemType Directory
 
 ---
 
-## Étape 3 — Création du partage réseau "Docs"
+## Étape 3 - Création du partage réseau "Docs"
 
 ```
 New-SmbShare -Name "Docs" -Path "C:\Shares\Documents_Entreprise"
 ```
 
-**Permission de partage — Tout le monde en Contrôle total (la sécurité est gérée par NTFS) :**
+**Permission de partage - Tout le monde en Contrôle total (la sécurité est gérée par NTFS) :**
 ```
 Grant-SmbShareAccess -Name "Docs" -AccountName "Tout le monde" -AccessRight Full -Force
 ```
 
 ---
 
-## Étape 4 — Création des sous-dossiers
+## Étape 4 - Création des sous-dossiers
 
 ```
 New-Item -Path "C:\Shares\Documents_Entreprise\RH" -ItemType Directory
@@ -61,7 +61,7 @@ New-Item -Path "C:\Shares\Documents_Entreprise\Direction" -ItemType Directory
 
 ---
 
-## Étape 5 — Création des groupes AD et des utilisateurs de test
+## Étape 5 - Création des groupes AD et des utilisateurs de test
 
 ### Groupes de sécurité
 
@@ -89,7 +89,7 @@ Add-ADGroupMember -Identity "Direction" -Members "user-direction"
 
 ---
 
-## Étape 6 — Configuration des permissions NTFS
+## Étape 6 - Configuration des permissions NTFS
 
 ### Matrice des permissions
 
@@ -117,7 +117,7 @@ Get-Acl "C:\Shares\Documents_Entreprise\Comptabilité" | Format-List
 
 ---
 
-## Étape 7 — Lister les partages sur le serveur
+## Étape 7 - Lister les partages sur le serveur
 
 ```
 Get-SmbShare
@@ -136,7 +136,7 @@ Get-SmbShare
 
 ---
 
-## Étape 8 — Mappage du lecteur réseau sur le poste client
+## Étape 8 - Mappage du lecteur réseau sur le poste client
 
 ### Configuration du DNS client (prérequis)
 
@@ -159,7 +159,7 @@ Le lecteur `Z:` apparaît dans l'explorateur sous **Emplacements réseau** → `
 
 ---
 
-## Étape 9 — Tests d'accès
+## Étape 9 - Tests d'accès
 
 ### Procédure de test
 
